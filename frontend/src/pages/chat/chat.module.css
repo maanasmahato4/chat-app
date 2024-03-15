@@ -6,17 +6,55 @@
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(6, 1fr);
+	grid-template-rows: repeat(6, 100px);
+	overflow: auto;
 }
 
 .chat-header {
-    grid-row: span 1;
+	grid-row: span 1;
+	background-color: skyblue;
+	padding: 1em;
 }
 
 .chat-body {
-    grid-row: span 4;
+	grid-row: span 4;
+	padding: 1em;
+	max-height: 100%;
+	overflow: auto;
 }
 
 .chat-footer {
-    grid-row: span 1;
+	grid-row: span 1;
+	background-color: skyblue;
+	padding: 1em;
+}
+
+.chat-footer input {
+	padding: 0.7em;
+	font-size: 1.1em;
+	border: none;
+	border-radius: 4px;
+}
+
+.chat-message {
+	margin-block: 0.2em;
+}
+
+.chat-button {
+	padding: 0.5em;
+	font-size: 1.1em;
+	border: none;
+	border-radius: 4px;
+	background-color: skyblue;
+	color: white;
+	transition-duration: 0.3s;
+	transition-property: transform;
+}
+
+.chat-button:hover,
+.chat-button:focus,
+.chat-button:active {
+	cursor: pointer;
+	transform: scale(1.03);
+	background-color: rgb(68, 113, 210);
 }

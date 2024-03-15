@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, Fragment, useEffect, useState } from 'react';
 import { User } from '../../@types/index.spec';
 import io, { Socket } from 'socket.io-client';
 import styles from './chat.module.css';
@@ -58,9 +58,31 @@ const Chat: React.FC<ChatComponentProps> = ({ user }): React.ReactElement => {
 				<div className={styles['chat-body']}>
 					{messages.map((message, idx) => {
 						return (
-							<div key={idx}>
-								{message.user}: {message.text}
-							</div>
+							<Fragment key={idx}>
+								{message.user === user.name ? (
+									<p
+										className='chat-message'
+										style={
+											message.user === user.name
+												? { textAlign: 'end' }
+												: { textAlign: 'start' }
+										}
+									>
+										{message.text}: <span>{message.user}</span>
+									</p>
+								) : (
+									<p
+										className='chat-message'
+										style={
+											message.user === user.name
+												? { textAlign: 'end' }
+												: { textAlign: 'start' }
+										}
+									>
+										<span>{message.user}</span>: {message.text}
+									</p>
+								)}
+							</Fragment>
 						);
 					})}
 				</div>
@@ -73,7 +95,11 @@ const Chat: React.FC<ChatComponentProps> = ({ user }): React.ReactElement => {
 								setUserMessage(e.target.value)
 							}
 						/>
-						<button type='button' onClick={sendMessage}>
+						<button
+							className={styles['chat-button']}
+							type='button'
+							onClick={sendMessage}
+						>
 							Send
 						</button>
 					</span>
