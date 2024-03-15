@@ -18,9 +18,9 @@ export function addUser({ id, name, room }: User): userRetrun {
 		room: room.trim().toLowerCase(),
 	};
 	const userExist = users.find(
-		(user) => user.name == newUser.name && user.room == newUser.room,
+		(user) => user.name === newUser.name && user.room === newUser.room,
 	);
-	if (!userExist) {
+	if (userExist && userExist !== undefined) {
 		return { error: 'user already exists' };
 	}
 	users.push(newUser);

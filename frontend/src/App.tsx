@@ -16,7 +16,7 @@ function App() {
 				path={`/chat/*`}
 				element={
 					<ProtectedRoute user={user}>
-						<Chat />
+						<Chat user={user} />
 					</ProtectedRoute>
 				}
 			/>
