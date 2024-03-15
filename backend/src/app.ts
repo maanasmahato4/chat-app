@@ -1,7 +1,7 @@
 import express from 'express';
 import socketio from 'socket.io';
 import http from 'node:http';
-import { addUser, getUsersInARoom } from './user.js';
+import { addUser, getUser, getUsersInARoom } from './user.js';
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -29,6 +29,14 @@ io.on('connect', (socket) => {
 			.to(user.room)
 			.emit('roomData', { room: user.room, users: getUsersInARoom(user.room) });
 		callback();
+
+		socket.on('sendMessage', (message, callback) => {
+			const user = getUser(socket.id);
+			if (!user) {
+				return callback('user not found');
+			}
+			io.to(user.room).emit('message', { user: user?.name, text: message });
+		});
 	});
 });
 
