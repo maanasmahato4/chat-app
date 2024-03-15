@@ -1,0 +1,66 @@
+section {
+	min-height: 100%;
+	display: grid;
+	align-items: center;
+	justify-content: stretch;
+	padding-inline: 0.5em;
+}
+
+.join-form {
+	background-color: whitesmoke;
+	filter: blur(100);
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1em;
+	padding: 1em;
+	padding-block: 4em;
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	align-items: center;
+	justify-content: stretch;
+}
+
+.join-form > input {
+	padding: 0.7em;
+	font-size: 1.1em;
+	border: none;
+	border-radius: 4px;
+}
+
+.join-button {
+	padding: 0.5em;
+	font-size: 1.1em;
+	border: none;
+	border-radius: 4px;
+	background-color: skyblue;
+	color: white;
+	transition-duration: 0.3s;
+	transition-property: transform;
+}
+
+.join-button:hover,
+.join-button:focus,
+.join-button:active {
+	cursor: pointer;
+	transform: scale(1.03);
+	background-color: rgb(68, 113, 210);
+}
+
+
+@media screen and (min-width: 639px) {
+    section {
+        justify-content: center;
+    }
+    .join-form {
+        width: 60vw;
+    }
+}
+
+@media screen and (min-width: 1365px) {
+    section {
+        justify-content: center;
+    }
+    .join-form {
+        width: 50vw;
+    }
+}
