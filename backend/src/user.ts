@@ -1,19 +1,30 @@
-type User = {
+interface User {
 	id: string;
 	name: string;
 	room: string;
-};
+}
+
+interface userRetrun {
+	user?: User;
+	error?: string;
+}
 
 const users: User[] = [];
 
-export function addUser({ id, name, room }: User): User {
-	const user: User = {
+export function addUser({ id, name, room }: User): userRetrun {
+	const newUser: User = {
 		id: id,
 		name: name.trim().toLowerCase(),
 		room: room.trim().toLowerCase(),
 	};
-	users.push(user);
-	return user;
+	const userExist = users.find(
+		(user) => user.name == newUser.name && user.room == newUser.room,
+	);
+	if (!userExist) {
+		return { error: 'user already exists' };
+	}
+	users.push(newUser);
+	return { user: newUser };
 }
 
 export function deleteUser(id: string) {
