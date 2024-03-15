@@ -1,7 +1,7 @@
 import express from 'express';
 import socketio from 'socket.io';
 import http from 'node:http';
-import { addUser, getUser, getUsersInARoom } from './user.js';
+import { addUser, deleteUser, getUser, getUsersInARoom } from './user.js';
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -36,6 +36,19 @@ io.on('connect', (socket) => {
 				return callback('user not found');
 			}
 			io.to(user.room).emit('message', { user: user?.name, text: message });
+		});
+
+		socket.on('disconnet', () => {
+			const user = deleteUser(socket.id);
+			if (!user) {
+				return;
+			}
+			io
+				.to(user.room)
+				.emit('message', { room: user.room, text: `${user.name} has left` });
+			io
+				.to(user.room)
+				.emit('roomData', { room: user.room, users: getUsersInARoom(user.room) });
 		});
 	});
 });
