@@ -1,0 +1,22 @@
+.chat-box {
+	min-height: 500px;
+	min-width: 500px;
+	border: none;
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(6, 1fr);
+}
+
+.chat-header {
+    grid-row: span 1;
+}
+
+.chat-body {
+    grid-row: span 4;
+}
+
+.chat-footer {
+    grid-row: span 1;
+}
