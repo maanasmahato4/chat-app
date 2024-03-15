@@ -1,13 +1,21 @@
 import express from 'express';
-import socketio from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import http from 'node:http';
+import cors from 'cors';
 import { addUser, deleteUser, getUser, getUsersInARoom } from './user.js';
 
 const app = express();
 const httpServer = http.createServer(app);
-const io = new socketio.Server(httpServer);
+const io = new Server(httpServer);
 
-io.on('connect', (socket) => {
+app.use(
+	cors({
+		origin: '*',
+		allowedHeaders: '*',
+	}),
+);
+
+io.on('connect', (socket: Socket) => {
 	socket.on('join', ({ name, room }, callback) => {
 		const { error, user } = addUser({ id: socket.id, name: name, room: room });
 		if (error) {
